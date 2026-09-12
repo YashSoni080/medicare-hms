@@ -1,0 +1,62 @@
+/* ── Design Tokens ── */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+    /* Colors */
+    --color-primary: #0d6e64;
+    --color-primary-hover: #095750;
+    --color-primary-soft: #e0f2ef;
+    --color-primary-muted: #b2ddd9;
+
+    --color-accent: #d97706;
+    --color-accent-soft: #fef3c7;
+
+    --color-bg: #f3f4f6;
+    --color-surface: #ffffff;
+    --color-surface-alt: #f9fafb;
+
+    --color-text: #111827;
+    --color-text-secondary: #6b7280;
+    --color-text-muted: #9ca3af;
+
+    --color-border: #e5e7eb;
+    --color-border-light: #f3f4f6;
+
+    --color-success: #059669;
+    --color-success-soft: #d1fae5;
+    --color-danger: #dc2626;
+    --color-danger-soft: #fee2e2;
+    --color-warning: #d97706;
+    --color-warning-soft: #fef3c7;
+    --color-info: #2563eb;
+    --color-info-soft: #dbeafe;
+
+    /* Spacing */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+
+    /* Radius */
+    --radius-sm: 6px;
+    --radius: 8px;
+    --radius-lg: 12px;
+    --radius-pill: 999px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
+
+    /* Sidebar */
+    --sidebar-width: 240px;
+    --sidebar-collapsed: 64px;
+    --sidebar-bg: #0d6e64;
+    --header-height: 56px;
+
+    /* Transitions */
+    --transition: 150ms ease;
+}

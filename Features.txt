@@ -1,0 +1,754 @@
+| #  | Feature / Module                              |
+| -- | --------------------------------------------- |
+| 1  | **Patient Registration & Profile Management** |
+| 2  | **Appointment Management**                    |
+| 3  | **OPD Management**                            |
+| 4  | **IPD / Inpatient Management**                |
+| 5  | **Emergency / Casualty Management**           |
+| 6  | **Doctor & Staff Management**                 |
+| 7  | **Electronic Medical Records (EMR/EHR)**      |
+| 8  | **Prescription Management**                   |
+| 9  | **Pharmacy Management**                       |
+| 10 | **Laboratory Management (LIS)**               |
+| 11 | **Radiology / Imaging Management**            |
+| 12 | **Operation Theatre (OT) Management**         |
+| 13 | **Blood Bank Management**                     |
+| 14 | **Nursing Management**                        |
+| 15 | **Ward & Bed Management**                     |
+| 16 | **Billing & Invoice Management**              |
+| 17 | **Insurance & TPA Management**                |
+| 18 | **Payment & Receipt Management**              |
+| 19 | **Inventory & Stock Management**              |
+| 20 | **Purchase & Supplier Management**            |
+| 21 | **Discharge Management**                      |
+| 22 | **Diet / Meal Management**                    |
+| 23 | **Ambulance Management**                      |
+| 24 | **Housekeeping Management**                   |
+| 25 | **HR & Payroll Management**                   |
+| 26 | **Accounting & Financial Management**         |
+| 27 | **Reports & Analytics Dashboard**             |
+| 28 | **User Roles & Access Control**               |
+| 29 | **Notifications & Communication**             |
+| 30 | **Audit Logs & System Settings**              |
+
+
+
+🏥 Complete Hospital Management System — Master Feature List
+A. Patient Management
+Patient registration
+Unique patient ID / UHID
+Patient demographic profile
+Patient photo/document management
+Patient contact information
+Emergency contact
+Guardian/dependent management
+Patient identification/verification
+Duplicate patient detection
+Patient search
+Patient merge
+Patient transfer
+Patient communication preferences
+Patient consent management
+Patient medical history
+Allergy management
+Chronic disease history
+Previous hospitalization history
+Family medical history
+Immunization history
+Social/lifestyle history
+Patient feedback
+Patient complaints/grievances
+Patient portal
+Patient mobile app
+B. Appointment Management
+Doctor appointment scheduling
+Department-wise appointments
+Appointment calendar
+Online appointment booking
+Walk-in appointment
+Phone appointment
+Appointment rescheduling
+Appointment cancellation
+Waiting-list management
+Token/queue management
+Doctor availability
+Doctor leave management
+Recurring appointments
+Appointment reminders
+SMS/email/push notifications
+Appointment check-in
+No-show tracking
+Follow-up scheduling
+Appointment history
+Online consultation booking
+C. OPD Management
+OPD registration
+OPD queue management
+Token generation
+Doctor consultation
+Vital signs
+Clinical notes
+Diagnosis
+Symptoms
+Examination
+Treatment plan
+Prescription
+Follow-up
+Referral management
+OPD billing
+OPD reports
+OPD statistics
+Multiple OPD counters
+Specialty-wise OPD
+D. IPD / Inpatient Management
+Admission management
+Admission requests
+Admission approval
+Bed allocation
+Ward allocation
+Room allocation
+Bed transfer
+Patient transfer between departments
+Admission history
+Inpatient clinical records
+Daily progress notes
+Doctor rounds
+Nursing notes
+Vital monitoring
+Medication administration
+Treatment charts
+Investigation orders
+Procedure orders
+Diet orders
+Discharge planning
+Discharge summary
+Death/disposition documentation
+Inpatient billing
+Length-of-stay tracking
+E. Emergency / Casualty
+Emergency registration
+Emergency triage
+Triage priority
+Emergency queue
+Emergency doctor assignment
+Emergency nursing
+Vital monitoring
+Emergency treatment
+Emergency medication
+Emergency investigations
+Emergency procedures
+Emergency billing
+Referral/transfer
+Ambulance integration
+Emergency discharge
+Emergency admission
+Emergency statistics
+F. Electronic Medical Record (EMR/EHR)
+Digital patient chart
+Medical history
+Clinical notes
+Diagnosis records
+Symptoms
+Vital signs
+Allergies
+Medication history
+Laboratory results
+Radiology reports
+Surgical history
+Family history
+Immunization
+Progress notes
+Care plans
+Discharge summaries
+Referral letters
+Clinical documents
+Electronic signatures
+Document versioning
+Medical record audit trail
+G. Doctor Management
+Doctor profiles
+Doctor specialties
+Doctor qualifications
+Doctor registration/license information
+Department assignment
+Consultation fees
+Doctor schedules
+Duty roster
+Leave management
+On-call scheduling
+Referral tracking
+Doctor performance reports
+Doctor commission/fee calculation
+Doctor dashboard
+H. Nursing Management
+Nursing station dashboard
+Nurse assignment
+Nurse roster
+Patient assignment
+Nursing notes
+Vital monitoring
+Medication administration record
+Nursing care plans
+Intake/output chart
+Injection records
+Wound-care records
+Patient observation
+Shift handover
+Nursing task management
+Nursing reports
+I. Pharmacy Management
+Medicine master
+Generic/brand medicine management
+Medicine categories
+Batch management
+Expiry management
+Prescription processing
+Dispensing
+Pharmacy billing
+Returns
+Purchase management
+Supplier management
+Stock management
+Stock transfer
+Stock adjustment
+Low-stock alerts
+Expiry alerts
+Controlled medicine tracking
+Medicine pricing
+Pharmacy sales reports
+Pharmacy profit reports
+Multi-store pharmacy
+Barcode scanning
+J. Laboratory / LIS
+Laboratory test master
+Test packages
+Test pricing
+Sample collection
+Sample labeling
+Barcode generation
+Sample tracking
+Sample rejection
+Sample processing
+Lab worklists
+Technician assignment
+Result entry
+Result verification
+Critical-value alerts
+Pathologist approval
+Lab report generation
+Digital lab reports
+Patient report portal
+Lab billing
+Reference ranges
+Machine/instrument integration
+Quality control
+Lab inventory
+Lab statistics
+K. Radiology / Imaging
+Radiology test master
+X-ray management
+CT management
+MRI management
+Ultrasound management
+Mammography
+Imaging scheduling
+Radiology worklist
+Technician assignment
+Radiologist assignment
+Image upload
+Image viewing
+Radiology reporting
+Report verification
+Digital signatures
+PACS integration
+DICOM support
+Imaging billing
+Imaging inventory
+Radiology statistics
+L. Operation Theatre (OT)
+OT scheduling
+OT calendar
+Surgery booking
+Surgeon assignment
+Anesthetist assignment
+OT staff assignment
+Pre-operative assessment
+Surgical checklist
+Consent management
+Anesthesia records
+Intraoperative notes
+Post-operative notes
+Surgical procedure records
+OT equipment management
+Surgical instrument management
+Implant management
+OT consumables
+OT billing
+OT utilization reports
+Surgery statistics
+M. ICU / Critical Care
+ICU admission
+ICU bed management
+ICU patient monitoring
+Vital monitoring
+Ventilator records
+Medication records
+Nursing charts
+Fluid balance
+Critical-care notes
+ICU procedures
+Device/equipment tracking
+ICU billing
+ICU reports
+N. Blood Bank
+Blood donor registration
+Donor eligibility
+Blood collection
+Blood group management
+Blood component management
+Blood storage
+Blood inventory
+Cross-matching
+Blood requests
+Blood issue
+Blood transfusion records
+Blood wastage tracking
+Expiry tracking
+Donor history
+Blood bank reports
+O. Billing & Revenue Cycle
+OPD billing
+IPD billing
+Emergency billing
+Pharmacy billing
+Laboratory billing
+Radiology billing
+OT billing
+Package billing
+Service charges
+Doctor consultation charges
+Room charges
+Bed charges
+Procedure charges
+Discount management
+Tax/GST configuration
+Advance payments
+Deposits
+Refunds
+Credit billing
+Payment collection
+Cash management
+Receipt generation
+Invoice generation
+Outstanding payments
+Payment reconciliation
+Revenue reports
+Daily collection reports
+P. Insurance / TPA
+Insurance company master
+TPA management
+Insurance policy management
+Patient insurance details
+Eligibility verification
+Pre-authorization
+Cashless admission
+Claim creation
+Claim submission
+Claim tracking
+Claim approval/rejection
+Claim documents
+Query management
+Settlement tracking
+Insurance billing
+Insurance reconciliation
+Insurance reports
+Q. Inventory & Procurement
+Item master
+Consumable management
+Medical equipment inventory
+Stock management
+Batch tracking
+Expiry tracking
+Warehouse management
+Multiple store management
+Stock transfer
+Stock issue
+Stock return
+Stock adjustment
+Minimum-stock alerts
+Purchase requisition
+Purchase orders
+Goods receipt
+Supplier management
+Supplier quotations
+Purchase invoices
+Purchase returns
+Vendor payments
+Procurement reports
+Inventory valuation
+R. Medical Equipment Management
+Equipment master
+Equipment allocation
+Equipment location tracking
+Equipment maintenance
+Preventive maintenance
+Calibration management
+Breakdown management
+Service contracts
+AMC/CMC tracking
+Warranty management
+Equipment utilization
+Equipment downtime
+Maintenance alerts
+Equipment cost tracking
+S. Ambulance Management
+Ambulance master
+Ambulance availability
+Ambulance booking
+Driver management
+Ambulance scheduling
+Patient transport
+Emergency dispatch
+Trip tracking
+Fuel management
+Ambulance maintenance
+Ambulance billing
+Ambulance reports
+T. Blood/Organ/Transplant-Related Management
+Donor management
+Recipient management
+Matching/eligibility records
+Waiting-list management
+Transplant case management
+Consent documentation
+Procedure tracking
+Follow-up tracking
+Specialized transplant reports
+U. Dietary / Nutrition
+Patient diet plans
+Dietician management
+Diet orders
+Meal scheduling
+Kitchen management
+Meal distribution
+Special diets
+Allergy-based diet alerts
+Diet billing
+Food inventory
+Nutrition reports
+V. Housekeeping & Facility Management
+Housekeeping requests
+Room cleaning status
+Bed cleaning
+Cleaning schedules
+Laundry management
+Linen management
+Waste management
+Biomedical waste tracking
+Facility maintenance
+Maintenance requests
+Work orders
+Utility management
+Pest-control scheduling
+Facility inspection
+W. HR & Employee Management
+Employee master
+Employee onboarding
+Employee documents
+Department management
+Designation management
+Shift management
+Attendance
+Biometric integration
+Leave management
+Payroll
+Salary structure
+Overtime
+Employee benefits
+Performance management
+Training management
+Staff credentials
+License/qualification expiry alerts
+Employee appraisal
+HR reports
+X. Finance & Accounting
+Chart of accounts
+General ledger
+Accounts payable
+Accounts receivable
+Cash management
+Bank management
+Bank reconciliation
+Expense management
+Income management
+Journal entries
+Tax management
+Financial statements
+Profit/loss reports
+Balance sheet
+Budget management
+Cost-center management
+Department-wise profitability
+Y. Patient Portal / Mobile App
+Patient login
+Appointment booking
+Appointment history
+Medical records
+Prescriptions
+Lab reports
+Radiology reports
+Bills
+Online payments
+Discharge documents
+Doctor communication
+Notifications
+Follow-up reminders
+Health records download
+Family-member profiles
+Z. Telemedicine
+Video consultation
+Audio consultation
+Virtual waiting room
+Online appointment
+Digital prescription
+Online payment
+Patient medical records
+Doctor availability
+Consultation history
+Follow-up appointments
+Telemedicine reports
+🔐 AA. Security & Access Control
+User management
+Role-based access control
+Permission management
+Department-based permissions
+User activity logs
+Audit trails
+Login history
+Password policies
+Session management
+Two-factor authentication
+Single sign-on
+Data encryption
+Backup management
+Disaster recovery
+IP/device restrictions
+Privacy controls
+Consent tracking
+Data access logs
+📊 AB. Reports & Analytics
+Hospital dashboard
+Patient statistics
+OPD reports
+IPD reports
+Emergency reports
+Doctor performance
+Department performance
+Revenue reports
+Expense reports
+Pharmacy reports
+Laboratory reports
+Radiology reports
+OT reports
+ICU reports
+Bed occupancy
+Average length of stay
+Mortality statistics
+Readmission statistics
+Patient satisfaction
+Insurance reports
+Inventory reports
+HR reports
+Financial reports
+Custom report builder
+Export to Excel/PDF
+Scheduled reports
+Management dashboards
+🔔 AC. Notifications & Communication
+SMS notifications
+Email notifications
+Push notifications
+WhatsApp integration
+Appointment reminders
+Payment reminders
+Lab-result notifications
+Prescription notifications
+Discharge notifications
+Emergency alerts
+Critical lab alerts
+Stock alerts
+Expiry alerts
+Staff notifications
+Internal messaging
+Announcement management
+🔗 AD. Integrations & Interoperability
+Payment gateway
+SMS gateway
+Email service
+WhatsApp/business messaging integration
+Accounting software integration
+Insurance/TPA integration
+Laboratory machine integration
+Radiology/PACS integration
+DICOM integration
+HL7 integration
+FHIR APIs
+Hospital website integration
+Mobile app APIs
+Biometric devices
+Barcode scanners
+RFID systems
+Queue/token displays
+Self-service kiosks
+Medical devices/IoT integration
+External health-record systems
+🧑‍💼 AE. Administration
+Hospital master
+Branch management
+Department management
+Sub-department management
+Room management
+Ward management
+Bed management
+Service master
+Package master
+Charge master
+Doctor master
+Staff master
+Vendor master
+Insurance master
+Tax configuration
+Hospital working hours
+Holiday calendar
+Workflow configuration
+Approval workflows
+System configuration
+🏢 AF. Multi-Hospital / Hospital Chain
+Multiple hospital branches
+Centralized patient ID
+Centralized EMR
+Branch-wise users
+Branch-wise billing
+Branch-wise inventory
+Central pharmacy
+Central laboratory
+Inter-branch patient transfer
+Consolidated financial reports
+Group-level dashboards
+Centralized doctor management
+Centralized procurement
+Branch comparison analytics
+🤖 AG. Advanced / AI Features
+AI-assisted clinical documentation
+Medical coding assistance
+Automated report summarization
+Appointment demand prediction
+Bed occupancy forecasting
+Patient readmission-risk analytics
+Revenue forecasting
+Inventory demand forecasting
+Drug-interaction alerts
+Clinical decision-support alerts
+Automated medical-record search
+Intelligent chatbot
+Voice-to-text clinical notes
+Automated report generation
+Anomaly detection
+Predictive maintenance for equipment
+
+These should be treated as decision-support tools, with appropriate clinical oversight rather than autonomous medical decision-making.
+
+🧪 AH. Clinical Research
+Clinical trial management
+Research patient management
+Study management
+Research consent
+Study protocols
+Research documentation
+Research data collection
+Research reports
+Investigator management
+Research billing
+🎓 AI. Medical Education & Training
+Staff training
+Training schedules
+Course management
+Certification tracking
+CME/CPD tracking
+Training attendance
+Examination/assessment records
+Training reports
+⭐ AJ. Quality & Accreditation
+Quality management
+Clinical quality indicators
+Incident reporting
+Adverse-event reporting
+Patient safety management
+Infection-control management
+Infection surveillance
+Medication-error reporting
+Complaint management
+Corrective/preventive actions
+Internal audits
+Accreditation documentation
+Quality dashboards
+Hospital policy management
+🦠 AK. Infection Control
+Infection surveillance
+Isolation management
+Infection case tracking
+Antibiotic stewardship records
+Hand-hygiene audits
+Infection-control rounds
+Sterilization tracking
+Outbreak monitoring
+Infection reports
+♻️ AL. Biomedical Waste & Environmental Management
+Biomedical waste categories
+Waste collection
+Waste segregation
+Waste disposal tracking
+Vendor management
+Waste quantity tracking
+Compliance reports
+Environmental monitoring
+📱 AM. Kiosk & Self-Service
+Patient self-registration
+Appointment check-in
+Token generation
+Bill payment
+Report printing
+Prescription printing
+Feedback collection
+Queue display
+Digital signage
+🌐 AN. Multi-Language & Accessibility
+Multiple languages
+Multi-currency support
+Date/time localization
+Accessible UI
+Large-text support
+Screen-reader compatibility
+Localized patient documents
+
+
+
+1. Patient Registration & UHID Management
+
+2. OPD Management & Queue System
+
+3. IPD, Ward & Bed Management
+
+4. Electronic Medical Records (EMR/EHR)
+
+5. e-Prescriptions & Pharmacy Management
+
+6. Laboratory Information System (LIS)
+
+7. Billing, Invoicing & Payment Gateway
+
+8. Insurance & TPA Management
+
+9. Inventory & Stock Management
+
+10. Role-Based Access Control (RBAC) & Audit Logs
