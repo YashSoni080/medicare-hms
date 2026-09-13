@@ -14,6 +14,20 @@ const STAT_CARDS = [
     { key: "bedOccupancy", icon: "🏥", label: "Bed Occupancy", color: "amber", format: "percent" },
 ];
 
+const QUICK_ACTIONS = [
+    { to: "/patients", label: "Register Patient", icon: "🧑‍🤝‍🧑", desc: "New UHID record" },
+    { to: "/opd", label: "Book Appointment", icon: "📅", desc: "OPD slot booking" },
+    { to: "/billing", label: "Create Invoice", icon: "💰", desc: "Bill & payments" },
+    { to: "/wards", label: "Admit Patient", icon: "🛏️", desc: "Ward admission" },
+];
+
+function getGreeting() {
+    const h = new Date().getHours();
+    if (h < 12) return "Good morning";
+    if (h < 17) return "Good afternoon";
+    return "Good evening";
+}
+
 export default function Dashboard() {
     const [stats, setStats] = useState(null);
     const [error, setError] = useState("");
@@ -32,12 +46,29 @@ export default function Dashboard() {
         return Number(value || 0).toLocaleString("en-IN");
     };
 
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+
     return (
         <div>
             <div className="page-head">
                 <div>
                     <h2>Dashboard</h2>
                     <p>Hospital overview at a glance</p>
+                </div>
+            </div>
+
+            <div className="dash-welcome">
+                <div className="dash-welcome-text">
+                    <h3>{getGreeting()}, {user.name || "there"} 👋</h3>
+                    <p>Here's what's happening at MediCare today.</p>
+                </div>
+                <div className="dash-welcome-date">
+                    {new Date().toLocaleDateString("en-IN", {
+                        weekday: "long",
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                    })}
                 </div>
             </div>
 
@@ -64,11 +95,16 @@ export default function Dashboard() {
             <div className="two-col">
                 <div className="card">
                     <h3>Quick Actions</h3>
-                    <div className="quick-actions">
-                        <Link className="btn btn-primary" to="/patients">Register Patient</Link>
-                        <Link className="btn btn-secondary" to="/opd">Book Appointment</Link>
-                        <Link className="btn btn-secondary" to="/billing">Create Invoice</Link>
-                        <Link className="btn btn-secondary" to="/wards">Admit Patient</Link>
+                    <div className="quick-actions-grid">
+                        {QUICK_ACTIONS.map((action) => (
+                            <Link className="quick-action-card" to={action.to} key={action.to}>
+                                <span className="quick-action-icon">{action.icon}</span>
+                                <div>
+                                    <strong>{action.label}</strong>
+                                    <span>{action.desc}</span>
+                                </div>
+                            </Link>
+                        ))}
                     </div>
                 </div>
                 <div className="card">

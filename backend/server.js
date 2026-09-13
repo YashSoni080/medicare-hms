@@ -16,6 +16,19 @@ import inventoryRoutes from "./routes/inventory.js";
 import insuranceRoutes from "./routes/insurance.js";
 import auditLogRoutes from "./routes/audit-logs.js";
 import dashboardRoutes from "./routes/dashboard.js";
+import emergencyRoutes from "./routes/emergency.js";
+import otRoutes from "./routes/ot.js";
+import bloodBankRoutes from "./routes/blood-bank.js";
+import nursingRoutes from "./routes/nursing.js";
+import dietRoutes from "./routes/diet.js";
+import radiologyRoutes from "./routes/radiology.js";
+import telemedicineRoutes from "./routes/telemedicine.js";
+import housekeepingRoutes from "./routes/housekeeping.js";
+import ambulanceRoutes from "./routes/ambulance.js";
+import staffRoutes from "./routes/staff.js";
+import reportRoutes from "./routes/reports.js";
+import serviceChargeRoutes from "./routes/service-charges.js";
+import userRoutes from "./routes/users.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
 // Load env vars
@@ -49,6 +62,19 @@ app.use("/api/inventory", inventoryRoutes);
 app.use("/api/insurance", insuranceRoutes);
 app.use("/api/audit-logs", auditLogRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/emergency", emergencyRoutes);
+app.use("/api/ot", otRoutes);
+app.use("/api/blood-bank", bloodBankRoutes);
+app.use("/api/nursing", nursingRoutes);
+app.use("/api/diet", dietRoutes);
+app.use("/api/radiology", radiologyRoutes);
+app.use("/api/telemedicine", telemedicineRoutes);
+app.use("/api/housekeeping", housekeepingRoutes);
+app.use("/api/ambulance", ambulanceRoutes);
+app.use("/api/staff", staffRoutes);
+app.use("/api/reports", reportRoutes);
+app.use("/api/service-charges", serviceChargeRoutes);
+app.use("/api/users", userRoutes);
 
 // --------------- Error handler (must be last) ---------------
 app.use(errorHandler);
