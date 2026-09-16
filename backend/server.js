@@ -48,7 +48,7 @@ const allowedOrigins = (process.env.CLIENT_URL || "")
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean)
-    .concat(["http://localhost:5173", "https://medicare-hms-2iw7.vercel.app"]);
+    .concat(["http://localhost:5173", "https://medicare-hms-2iw7.vercel.app", "https://medicare-hms-one.vercel.app/"]);
 
 app.use(
     cors({
