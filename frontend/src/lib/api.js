@@ -9,8 +9,8 @@ const API_URL =
     configuredApiUrl && !(import.meta.env.PROD && isLocalUrl(configuredApiUrl))
         ? configuredApiUrl
         : import.meta.env.DEV
-          ? "http://localhost:5000/api"
-          : "https://medicare-hms-one.vercel.app/api";
+            ? "http://localhost:5000/api"
+            : "https://medicare-hms-one.vercel.app/api";
 
 const authHeader = () => {
     const token = localStorage.getItem("token");
