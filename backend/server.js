@@ -43,7 +43,27 @@ connectDB();
 const app = express();
 
 // --------------- Middleware ---------------
-app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:5173", credentials: true }));
+// Allow multiple origins: CLIENT_URL can be a comma-separated list.
+// Defaults cover local dev and the deployed Vercel frontend, so the API
+// works even if CLIENT_URL is not set in the environment.
+const allowedOrigins = (process.env.CLIENT_URL || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .concat(["http://localhost:5173", "https://medicare-hms-2iw7.vercel.app"]);
+
+app.use(
+    cors({
+        origin(origin, callback) {
+            // Allow requests with no origin (curl, Postman, same-origin)
+            if (!origin || allowedOrigins.includes(origin)) {
+                return callback(null, true);
+            }
+            return callback(null, false);
+        },
+        credentials: true,
+    })
+);
 app.use(express.json());
 
 // --------------- Routes ---------------
