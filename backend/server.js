@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import mongoose from "mongoose";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
@@ -37,9 +38,6 @@ import { errorHandler } from "./middleware/errorHandler.js";
 // Load env vars
 dotenv.config();
 
-// Connect to database
-connectDB();
-
 const app = express();
 
 // --------------- Middleware ---------------
@@ -69,6 +67,17 @@ app.use(express.json());
 // --------------- Routes ---------------
 app.get("/", (_req, res) => {
     res.json({ status: "ok", message: "MediCare API is running" });
+});
+
+// Health check — reports DB connectivity so deployment issues are obvious
+app.get("/api/health", (_req, res) => {
+    const dbState = mongoose.connection.readyState; // 0=disconnected, 1=connected, 2=connecting, 3=disconnecting
+    const states = ["disconnected", "connected", "connecting", "disconnecting"];
+    res.status(dbState === 1 ? 200 : 503).json({
+        status: dbState === 1 ? "ok" : "degraded",
+        db: states[dbState] || "unknown",
+        mongoUriSet: Boolean(process.env.MONGO_URI),
+    });
 });
 
 app.use("/api/auth", authRoutes);
@@ -123,6 +132,20 @@ app.use(errorHandler);
 
 // --------------- Start server ---------------
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`MediCare API listening on port ${PORT}`);
-});
+
+// Connect to MongoDB, then start listening. On failure, log a clear message
+// and keep the process alive so Vercel can report the error instead of
+// buffering queries for 10s.
+connectDB()
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(`MediCare API listening on port ${PORT}`);
+        });
+    })
+    .catch((err) => {
+        console.error("Failed to connect to MongoDB:", err.message);
+        // Still start the server so /api/health can report the problem
+        app.listen(PORT, () => {
+            console.log(`MediCare API listening on port ${PORT} (DB NOT CONNECTED)`);
+        });
+    });
