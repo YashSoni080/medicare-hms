@@ -1,6 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.js";
 import doctorRoutes from "./routes/doctors.js";
@@ -75,6 +78,25 @@ app.use("/api/staff", staffRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/service-charges", serviceChargeRoutes);
 app.use("/api/users", userRoutes);
+
+// --------------- Production: serve built frontend ---------------
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const distPath = path.join(__dirname, "..", "frontend", "dist");
+
+if (fs.existsSync(distPath)) {
+    app.use(express.static(distPath));
+    // SPA fallback: any non-API GET request serves the React app
+    app.use((req, res, next) => {
+        if (req.method === "GET" && !req.path.startsWith("/api/")) {
+            return res.sendFile(path.join(distPath, "index.html"));
+        }
+        next();
+    });
+    console.log("Serving frontend from", distPath);
+} else {
+    console.log("frontend/dist not found - API only mode (run `npm run build` in frontend to enable static serving)");
+}
 
 // --------------- Error handler (must be last) ---------------
 app.use(errorHandler);

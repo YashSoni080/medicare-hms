@@ -13,17 +13,31 @@ A full-stack **Hospital Management System (HMS)** built with the **MERN stack** 
 | **Dashboard** | Role-aware overview with today's appointments, admissions, revenue, and quick stats |
 | **Patients** | Registration, UHID, demographics, contact & emergency info, search |
 | **OPD & Queue** | Outpatient appointments, queue management, walk-ins |
+| **Emergency** | Emergency cases, triage, priority tracking |
+| **Telemedicine** | Virtual consultations, video-call scheduling |
 | **Wards & IPD** | Inpatient admission, ward & bed allocation, discharge |
+| **Operation Theatre** | OT scheduling, surgery records |
+| **Nursing Station** | Nursing tasks, vitals, care notes |
+| **Diet & Nutrition** | Diet plans per patient, meal tracking |
 | **Records (EMR)** | Electronic medical records, encounter notes, history |
 | **Pharmacy** | Prescriptions, dispensing, stock-aware medication |
-| **Lab (LIS)** | Lab orders, sample collection, results entry |
+| **Lab (LIS)** | Lab orders, sample collection, results entry, barcodes |
+| **Blood Bank** | Blood units, stock, requests, compatibility |
+| **Radiology (RIS)** | Imaging orders, reports |
 | **Billing** | Invoices, payments, receipts |
 | **Insurance** | Policies, claims, TPA tracking |
 | **Inventory** | Stock items, purchase orders, low-stock alerts |
+| **Housekeeping** | Room cleaning tasks, status tracking |
+| **Ambulance** | Ambulance fleet, trip logs |
+| **Staff** | Staff records, departments, roles |
+| **Reports** | Analytics, revenue, patient statistics |
+| **Service Charges** | Configurable charge catalog |
 | **Admin & Audit** | User/role management, audit logs, system settings |
 
 ### Role-based access
 `admin` · `doctor` · `receptionist` · `pharmacist` · `lab-tech` · `patient`
+
+Each role sees only the modules it needs in the sidebar, and the backend enforces the same restrictions on every API route.
 
 ---
 
@@ -133,7 +147,7 @@ Base URL: `http://localhost:5000/api`
 
 | Area | Routes |
 | --- | --- |
-| Auth | `POST /auth/login` |
+| Auth | `POST /auth/login`, `GET /auth/me`, `PUT /auth/change-password`, `PUT /auth/profile` |
 | Patients | `GET/POST /patients`, `GET/PUT/DELETE /patients/:id` |
 | Doctors | `GET/POST /doctors`, `GET/PUT/DELETE /doctors/:id` |
 | Appointments | `GET/POST /appointments`, `PUT/DELETE /appointments/:id` |
@@ -145,10 +159,47 @@ Base URL: `http://localhost:5000/api`
 | Wards | `GET/POST /wards`, `GET/PUT /wards/:id` |
 | Inventory | `GET/POST /inventory`, `GET/PUT /inventory/:id` |
 | Insurance | `GET/POST /insurance`, `GET/PUT /insurance/:id` |
+| Emergency | `GET/POST /emergency`, `GET/PUT /emergency/:id` |
+| OT | `GET/POST /ot`, `GET/PUT /ot/:id` |
+| Blood Bank | `GET/POST /blood-bank`, `GET/PUT /blood-bank/:id` |
+| Nursing | `GET/POST /nursing`, `GET/PUT /nursing/:id` |
+| Diet | `GET/POST /diet`, `GET/PUT /diet/:id` |
+| Radiology | `GET/POST /radiology`, `GET/PUT /radiology/:id` |
+| Telemedicine | `GET/POST /telemedicine`, `GET/PUT /telemedicine/:id` |
+| Housekeeping | `GET/POST /housekeeping`, `GET/PUT /housekeeping/:id` |
+| Ambulance | `GET/POST /ambulance`, `GET/PUT /ambulance/:id` |
+| Staff | `GET/POST /staff`, `GET/PUT /staff/:id` |
+| Reports | `GET /reports/*` |
+| Service Charges | `GET/POST /service-charges`, `GET/PUT /service-charges/:id` |
+| Users | `GET/POST /users`, `GET/PUT/DELETE /users/:id` |
 | Audit Logs | `GET /audit-logs` |
 | Dashboard | `GET /dashboard/stats` |
 
 All endpoints except `POST /auth/login` require a `Authorization: Bearer <token>` header.
+
+---
+
+## 🚀 Production Deployment
+
+The backend automatically serves the built frontend when `frontend/dist` exists — no separate static host needed.
+
+```bash
+# 1. Build the frontend
+cd frontend
+npm run build
+
+# 2. Configure backend env
+cd ../backend
+cp .env.example .env
+# set MONGO_URI (Atlas), JWT_SECRET, CLIENT_URL
+
+# 3. Start the server (serves API + frontend on one port)
+npm start
+```
+
+Open `http://<server>:5000` — the React app and API are served together.
+
+> 📖 See **`DEPLOYMENT_GUIDE.txt`** for a step-by-step free deployment walkthrough (MongoDB Atlas + Render/Railway), and **`USER_GUIDE.txt`** for role-by-role usage instructions.
 
 ---
 

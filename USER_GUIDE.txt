@@ -1,0 +1,387 @@
+================================================================================
+                    MEDICARE HOSPITAL MANAGEMENT SYSTEM
+                            USER GUIDE
+================================================================================
+
+This guide explains how to use the MediCare HMS application for every role:
+Admin, Doctor, Receptionist, Pharmacist, Lab Technician, and Patient.
+
+--------------------------------------------------------------------------------
+TABLE OF CONTENTS
+--------------------------------------------------------------------------------
+1.  Getting Started (Login & First Steps)
+2.  Common Actions (used by everyone)
+3.  Admin Guide
+4.  Doctor Guide
+5.  Receptionist Guide
+6.  Pharmacist Guide
+7.  Lab Technician Guide
+8.  Patient Guide
+9.  Workflow Diagrams (Lab, Prescription, Billing)
+10. Troubleshooting & Tips
+
+================================================================================
+1. GETTING STARTED (LOGIN & FIRST STEPS)
+================================================================================
+
+1.1  Open the app
+     - Local development:  http://localhost:5173
+     - Production:         http://<your-server-address>:5000
+
+1.2  Log in
+     - Enter the email and password given to you by the administrator.
+     - Click "Sign In".
+
+     Default accounts created by the setup script (CHANGE THESE AFTER FIRST LOGIN):
+       Admin:        admin@hospital.com   / admin123
+       (Your hospital may have created other accounts for you.)
+
+1.3  First things to do after logging in
+     - Click the lock icon (top-right, next to your name) to change your
+       password to something only you know.
+     - Look at the left sidebar: you will only see the modules your role is
+       allowed to use. This is intentional.
+
+1.4  Logging out
+     - Click the power/logout icon at the bottom of the left sidebar.
+
+1.5  Sidebar tips
+     - Click the arrow button at the top of the sidebar to collapse/expand it.
+     - The page title and today's date are shown in the top bar.
+
+================================================================================
+2. COMMON ACTIONS (USED BY EVERYONE)
+================================================================================
+
+2.1  Searching
+     - Most list pages (Patients, Doctors, Invoices, etc.) have a search box
+       at the top. Type a name, ID, or phone number and press Enter.
+
+2.2  Forms
+     - Fill in the fields and click the colored button at the bottom
+       (usually "Save", "Create", or "Update").
+     - Red text near a field means that field is required or invalid.
+
+2.3  Status badges
+     - Colored pills show the state of a record, for example:
+         Green  = Active / Completed / Verified / Paid
+         Amber  = Pending / In Progress / Ordered
+         Red    = Cancelled / Rejected / Overdue / Low Stock
+         Blue   = Scheduled / Admitted / Collected
+
+2.4  Changing your password
+     - Click the lock icon in the top-right corner.
+     - Enter your current password, then your new password twice.
+     - New password must be at least 6 characters.
+
+================================================================================
+3. ADMIN GUIDE
+================================================================================
+
+The Admin has access to every module. Your main responsibilities are
+configuration, user management, and oversight.
+
+3.1  Dashboard
+     - Shows today's appointments, admissions, revenue, and quick stats.
+     - Use the quick-action buttons to jump to common tasks.
+
+3.2  Admin & Audit (IMPORTANT)
+     - Manage user accounts: create users for doctors, receptionists,
+       pharmacists, lab technicians, and patients.
+     - Assign roles when creating a user. Roles cannot be changed casually.
+     - View the audit log to see who did what and when. Review this
+       regularly for security.
+
+3.3  Staff
+     - Add and manage hospital staff records (name, department, designation,
+       contact, joining date).
+     - Staff records are separate from login accounts.
+
+3.4  Service Charges
+     - Maintain the price catalog: consultation fees, lab tests, procedures,
+       room charges, etc.
+     - These charges are used when creating invoices, so keep them updated.
+
+3.5  Inventory
+     - Add stock items (medicines, consumables, equipment).
+     - Create purchase orders when stock runs low.
+     - Watch the low-stock alerts on the inventory page.
+
+3.6  Reports
+     - View revenue, patient, and operational reports.
+     - Use filters (date range, department) to narrow results.
+
+3.7  Billing & Insurance
+     - Review invoices and payments.
+     - Manage insurance policies and claims.
+
+3.8  Housekeeping & Ambulance
+     - Assign housekeeping tasks and track room cleaning status.
+     - Manage the ambulance fleet and trip logs.
+
+3.9  Best practices for admins
+     - Change the default admin password immediately after setup.
+     - Create one account per person - never share logins.
+     - Deactivate accounts of staff who leave (do not delete, to keep audit history).
+     - Review audit logs weekly.
+
+================================================================================
+4. DOCTOR GUIDE
+================================================================================
+
+Your daily workflow: see patients in OPD, review their history, write
+prescriptions and lab orders, and manage admitted patients.
+
+4.1  OPD & Queue
+     - Open "OPD & Queue" to see today's waiting patients.
+     - The queue shows appointments and walk-ins in order.
+     - Click a patient to start/continue their consultation.
+
+4.2  Patients
+     - Search for a patient by name or UHID (e.g., HOSP-2026-000001).
+     - Open a patient to see their full profile and history.
+
+4.3  Medical Records / Encounters
+     - During a consultation, create an Encounter (visit note):
+       symptoms, diagnosis, vitals, treatment plan.
+     - The patient's full medical history is available under Medical Records.
+
+4.4  Prescriptions
+     - Write prescriptions with medicine name, dosage, frequency, and duration.
+     - The pharmacy will see the prescription and dispense the medicines.
+     - Prescription status flow:
+         Prescribed -> Dispensed (by pharmacist) -> Completed
+
+4.5  Lab Orders
+     - Order lab tests (blood, urine, etc.) for a patient.
+     - The lab technician will collect the sample, run the test, and publish
+       the result. You will see the result appear on the order.
+     - Lab order status flow:
+         Ordered -> Sample Collected -> Received -> Processing
+         -> Verified -> Published
+
+4.6  Radiology (RIS)
+     - Order imaging studies (X-ray, CT, MRI, ultrasound).
+     - View the radiologist's report when ready.
+
+4.7  Blood Bank
+     - Request blood units for a patient.
+     - Check stock and compatibility before requesting.
+
+4.8  Wards & IPD
+     - Admit patients who need inpatient care; assign ward and bed.
+     - Track the patient's stay and discharge when ready.
+
+4.9  Operation Theatre
+     - Schedule surgeries; record the procedure and outcome.
+
+4.10 Nursing Station
+     - Review nursing tasks and vitals recorded by the nursing team.
+
+4.11 Diet & Nutrition
+     - Create diet plans for admitted patients (normal, diabetic, low-salt, etc.).
+
+4.12 Telemedicine
+     - Conduct virtual consultations; schedule video calls with patients.
+
+4.13 Emergency
+     - See emergency cases, triage priority, and manage treatment.
+
+4.14 Best practices for doctors
+     - Always create an Encounter for every visit - it builds the patient's EMR.
+     - Write clear prescriptions (dosage + frequency + duration).
+     - Order lab tests from within the patient's record so results link back.
+
+================================================================================
+5. RECEPTIONIST GUIDE
+================================================================================
+
+You are the front desk. You handle registration, appointments, admissions,
+billing, and front-office services.
+
+5.1  Patient Registration
+     - Open "Patients" -> "Add Patient".
+     - Enter name, age/DOB, gender, phone, address, and emergency contact.
+     - The system generates a unique UHID (e.g., HOSP-2026-000123).
+     - Give the UHID to the patient - they will use it for all future visits.
+
+5.2  Appointments (OPD)
+     - Book appointments for patients with available doctors.
+     - Walk-in patients can be added directly to the OPD queue.
+
+5.3  OPD & Queue
+     - Manage the daily queue: add walk-ins, mark patients as arrived,
+       and call the next patient.
+
+5.4  Billing
+     - Create invoices for consultations, procedures, room charges, etc.
+     - Record payments (cash, card, UPI) and print/give receipts.
+     - Invoice status flow:
+         Draft -> Issued -> Partially Paid -> Paid -> (Cancelled if needed)
+
+5.5  Wards & IPD (Admissions)
+     - Admit patients: select ward, bed, and admitting doctor.
+     - Track bed availability on the ward page.
+
+5.6  Emergency
+     - Register emergency cases at the front desk with triage priority.
+
+5.7  Ambulance
+     - Log ambulance trips: destination, patient, driver, charges.
+
+5.8  Insurance
+     - Register patient insurance policies and file claims.
+
+5.9  Housekeeping
+     - Create housekeeping tasks for rooms and track completion.
+
+5.10 Best practices for receptionists
+     - Always search for an existing patient before registering a new one
+       (avoid duplicate UHIDs).
+     - Collect the UHID at every visit.
+     - Issue invoices at the time of service to avoid billing backlogs.
+
+================================================================================
+6. PHARMACIST GUIDE
+================================================================================
+
+6.1  Pharmacy
+     - Open "Pharmacy" to see prescriptions waiting to be dispensed.
+     - For each prescription:
+         a. Check the medicines and quantities.
+         b. Verify stock availability (the system checks automatically).
+         c. Dispense the medicines - status changes to "Dispensed".
+     - If stock is insufficient, the system will warn you. Restock via
+       Inventory (create a purchase order) or inform the admin.
+
+6.2  Inventory
+     - View stock levels and low-stock alerts.
+     - Add new stock items.
+     - Create purchase orders for replenishment.
+     - Record stock received when the order arrives.
+
+6.3  Best practices for pharmacists
+     - Dispense only against a doctor's prescription.
+     - Double-check dosage and patient name before handing over medicines.
+     - Keep inventory updated in real time.
+
+================================================================================
+7. LAB TECHNICIAN GUIDE
+================================================================================
+
+7.1  Lab (LIS)
+     - Open "Lab" to see all lab orders.
+     - Orders arrive from doctors with status "Ordered".
+     - Workflow:
+         a. Ordered   - doctor has ordered the test
+         b. Sample Collected - you collect the sample (blood/urine/etc.)
+         c. Received  - sample reaches the lab
+         d. Processing - test is running
+         e. Verified  - you verify the result
+         f. Published - result is visible to the doctor and patient
+     - Each order has a barcode (e.g., LAB-20260214-000001) - use it to
+       track the sample.
+
+7.2  Blood Bank
+     - Manage blood units: add donations, record blood group, expiry.
+     - Fulfill blood requests from doctors.
+     - Track stock by blood group.
+
+7.3  Radiology (RIS)
+     - Manage imaging orders and upload/record reports.
+
+7.4  Best practices for lab technicians
+     - Update the status at every step - doctors rely on it.
+     - Verify results carefully before publishing.
+     - Never publish a result without a sample.
+
+================================================================================
+8. PATIENT GUIDE
+================================================================================
+
+8.1  Your account
+     - The hospital creates your login (email + password).
+     - Change your password after first login (lock icon, top-right).
+
+8.2  OPD & Queue
+     - See your position in today's queue.
+
+8.3  Medical Records
+     - View your medical history, encounters, prescriptions, and lab results
+       (once published by the lab).
+
+8.4  Appointments
+     - Book a follow-up appointment with your doctor.
+
+8.5  Best practices for patients
+     - Keep your UHID handy for every visit.
+     - Update your phone number with the receptionist if it changes.
+
+================================================================================
+9. WORKFLOW DIAGRAMS
+================================================================================
+
+9.1  Lab Order Flow
+     Doctor orders test
+        |
+        v
+     Ordered -----------> Sample Collected -----------> Received
+        |                                                 |
+        |                                                 v
+        |                                             Processing
+        |                                                 |
+        |                                                 v
+        |                                             Verified
+        |                                                 |
+        |                                                 v
+        +------------------------------------------> Published
+                                                      (doctor & patient see result)
+
+9.2  Prescription Flow
+     Doctor prescribes
+        |
+        v
+     Prescribed -----------> Dispensed (pharmacist) -----------> Completed
+
+9.3  Invoice / Billing Flow
+     Services rendered (consultation, lab, room, procedure)
+        |
+        v
+     Draft -----------> Issued -----------> Partially Paid -----------> Paid
+        |                                                              |
+        +---------------------------- Cancelled -----------------------+
+
+9.4  Patient Journey (full)
+     Registration (UHID) -> OPD Appointment -> Consultation (Encounter)
+        -> Prescription / Lab Order / Admission
+        -> Pharmacy / Lab / Ward
+        -> Billing & Payment -> Discharge / Follow-up
+
+================================================================================
+10. TROUBLESHOOTING & TIPS
+================================================================================
+
+10.1 "Cannot log in"
+     - Check caps lock / email spelling.
+     - Ask the admin to reset your password (admin can create a new password).
+
+10.2 "I don't see a module I need"
+     - The sidebar shows only modules for your role. If you genuinely need
+       another module, ask the admin to change your role.
+
+10.3 "Page shows an error"
+     - Refresh the page. If it persists, note the error message and contact
+       the administrator.
+
+10.4 "Lab result not visible"
+     - The result is only visible after the lab publishes it (status
+       "Published"). Ask the lab technician if it is still processing.
+
+10.5 General tips
+     - Use the search boxes - they are faster than scrolling.
+     - Keep your password private; never share accounts.
+     - Log out when you leave your workstation.
+
+================================================================================
+                    END OF USER GUIDE
+================================================================================

@@ -1,0 +1,255 @@
+================================================================================
+                    MEDICARE HOSPITAL MANAGEMENT SYSTEM
+                        FREE DEPLOYMENT GUIDE
+================================================================================
+
+This guide shows how to deploy MediCare HMS to the internet for FREE using:
+
+    - MongoDB Atlas  (free cloud database - 512 MB storage)
+    - Render.com     (free web service - hosts the backend + frontend together)
+
+Total cost: $0 per month (within free-tier limits).
+
+--------------------------------------------------------------------------------
+TABLE OF CONTENTS
+--------------------------------------------------------------------------------
+1.  What You Need Before Starting
+2.  Step 1 - Push Your Code to GitHub
+3.  Step 2 - Create a Free MongoDB Atlas Database
+4.  Step 3 - Deploy the Backend on Render.com
+5.  Step 4 - Create the Admin Account
+6.  Step 5 - Test Your Live URL
+7.  Alternative Option A - Railway (one-click)
+8.  Alternative Option B - Vercel/Netlify (frontend) + Render (backend)
+9.  Going Live Checklist (security & settings)
+10. Updating Your App After Changes
+
+================================================================================
+1. WHAT YOU NEED BEFORE STARTING
+================================================================================
+
+- A GitHub account (free): https://github.com
+- A MongoDB Atlas account (free): https://www.mongodb.com/cloud/atlas
+- A Render.com account (free): https://render.com
+- Node.js installed on your computer (for local builds)
+
+The project already has everything needed:
+- backend/server.js serves the built frontend automatically (SPA fallback)
+- .env.example files show which environment variables are required
+- setup.js creates the admin account
+
+================================================================================
+2. STEP 1 - PUSH YOUR CODE TO GITHUB
+================================================================================
+
+2.1  Create a new repository on GitHub (do NOT initialize with README).
+
+2.2  In your project folder, run:
+
+     git init
+     git add .
+     git commit -m "MediCare HMS initial commit"
+     git branch -M main
+     git remote add origin https://github.com/<your-username>/<repo-name>.git
+     git push -u origin main
+
+     IMPORTANT: .env files are already git-ignored, so your secrets will
+     NOT be uploaded. Double-check with:  git status
+
+================================================================================
+3. STEP 2 - CREATE A FREE MONGODB ATLAS DATABASE
+================================================================================
+
+3.1  Log in to https://www.mongodb.com/cloud/atlas
+
+3.2  Create a new project (e.g., "MediCare").
+
+3.3  Click "Build a Database" -> choose the FREE tier (M0).
+     - Provider: any (AWS is fine)
+     - Region: choose one close to your users (e.g., ap-south-1 for India)
+
+3.4  Create a database user:
+     - Username: e.g., medicare_admin
+     - Password: generate a strong one and SAVE IT (you will need it)
+
+3.5  Network access:
+     - Click "Network Access" -> "Add IP Address"
+     - Choose "Allow access from anywhere" (0.0.0.0/0) for simplicity.
+       (For a hospital, restrict to your office IPs instead.)
+
+3.6  Get your connection string:
+     - Click "Database" -> your cluster -> "Connect" -> "Drivers"
+     - Copy the connection string. It looks like:
+
+       mongodb+srv://medicare_admin:<password>@cluster0.xxxxx.mongodb.net/
+
+     - Replace <password> with the database user password you created.
+     - Add the database name at the end:
+
+       mongodb+srv://medicare_admin:<password>@cluster0.xxxxx.mongodb.net/hospital_management
+
+     This is your MONGO_URI. Keep it safe.
+
+================================================================================
+4. STEP 3 - DEPLOY THE BACKEND ON RENDER.COM
+================================================================================
+
+4.1  Log in to https://render.com (sign up with GitHub - easiest).
+
+4.2  Click "New" -> "Web Service".
+
+4.3  Connect your GitHub account and select the repository you pushed.
+
+4.4  Fill in the settings:
+
+     Name:                medicare-hms
+     Region:              choose closest to your users
+     Branch:              main
+     Root Directory:      backend
+     Runtime:             Node
+     Build Command:       npm install
+     Start Command:       node server.js
+     Instance Type:       Free
+
+4.5  Add environment variables (click "Advanced" -> "Environment"):
+
+     MONGO_URI    = mongodb+srv://medicare_admin:<password>@cluster0.xxxxx.mongodb.net/hospital_management
+     JWT_SECRET   = <generate a long random string, see below>
+     CLIENT_URL   = https://medicare-hms.onrender.com   (your Render URL)
+     PORT         = 10000   (Render sets this automatically; leave blank is fine)
+
+     To generate a strong JWT_SECRET, run this on your computer:
+
+       node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
+
+     Copy the output and paste it as JWT_SECRET.
+
+4.6  Click "Create Web Service".
+
+4.7  Render will build and deploy. Wait 2-5 minutes for the first deploy.
+     Your URL will be:  https://medicare-hms.onrender.com
+
+     NOTE: The frontend must be built BEFORE the backend starts, because the
+     backend serves the frontend from frontend/dist. Add this to the build
+     command so the frontend is built automatically:
+
+     Build Command:  npm install && cd ../frontend && npm install && npm run build
+
+     (This installs backend deps, then builds the frontend into
+      frontend/dist, which the backend serves.)
+
+================================================================================
+5. STEP 4 - CREATE THE ADMIN ACCOUNT
+================================================================================
+
+The setup script creates the admin. On Render, run it once via the shell:
+
+5.1  In Render, open your web service -> "Shell" tab.
+
+5.2  Run:
+
+     node setup.js --email admin@hospital.com --password <strong-password> --name "Hospital Admin"
+
+     (If the Shell tab is unavailable on the free tier, create the admin
+      through the app itself: register a patient account, then update its
+      role to admin in MongoDB Atlas, OR run setup.js locally against the
+      same Atlas database - see section 5.3.)
+
+5.3  Alternative - run setup locally against Atlas:
+
+     cd backend
+     npm install
+     set MONGO_URI=mongodb+srv://medicare_admin:<password>@cluster0.xxxxx.mongodb.net/hospital_management
+     node setup.js --email admin@hospital.com --password <strong-password> --name "Hospital Admin"
+
+     (On Windows use:  set MONGO_URI=...   On Mac/Linux use:  export MONGO_URI=...)
+
+5.4  Log in at https://medicare-hms.onrender.com with the admin credentials
+     and change the password immediately.
+
+================================================================================
+6. STEP 5 - TEST YOUR LIVE URL
+================================================================================
+
+- Open https://medicare-hms.onrender.com
+- Log in with the admin account.
+- Create a few test records (a patient, an appointment, an invoice).
+- Check the Render logs (your service -> "Logs") if anything fails.
+
+================================================================================
+7. ALTERNATIVE OPTION A - RAILWAY (ONE-CLICK)
+================================================================================
+
+Railway (https://railway.app) also has a free tier and is very similar:
+
+7.1  Sign up with GitHub, click "New Project" -> "Deploy from GitHub repo".
+
+7.2  Railway auto-detects the project. Set:
+     - Root Directory: backend
+     - Build Command:  npm install && cd ../frontend && npm install && npm run build
+     - Start Command:  node server.js
+
+7.3  Add the same environment variables (MONGO_URI, JWT_SECRET, CLIENT_URL).
+
+7.4  Railway gives you a URL like https://medicare-hms.up.railway.app
+
+================================================================================
+8. ALTERNATIVE OPTION B - VERCEL/NETLIFY (FRONTEND) + RENDER (BACKEND)
+================================================================================
+
+Use this if you want the frontend on a CDN (faster loading worldwide).
+
+8.1  Deploy the backend on Render as in section 4 (API only).
+     - Your API URL will be: https://medicare-hms.onrender.com/api
+
+8.2  Deploy the frontend on Vercel:
+     - Push the frontend folder to its own GitHub repo (or use the root).
+     - On Vercel: Import project -> Framework: Vite -> Build: npm run build
+     - Output directory: dist
+
+8.3  Set the frontend environment variable:
+     VITE_API_URL = https://medicare-hms.onrender.com/api
+
+     IMPORTANT: VITE_ variables are baked in at build time, so set this
+     BEFORE the build/deploy.
+
+8.4  Update CORS on the backend:
+     CLIENT_URL = https://your-app.vercel.app
+
+8.5  Redeploy the backend after changing CLIENT_URL.
+
+================================================================================
+9. GOING LIVE CHECKLIST (SECURITY & SETTINGS)
+================================================================================
+
+[ ] Change the default admin password immediately.
+[ ] Use a strong, unique JWT_SECRET (48+ random bytes).
+[ ] Restrict MongoDB Atlas network access to your hospital's IPs
+    (instead of 0.0.0.0/0) once you know your static IP.
+[ ] Create individual accounts for every staff member - no shared logins.
+[ ] Deactivate accounts of staff who leave (don't delete - keep audit trail).
+[ ] Review the audit log (Admin & Audit) regularly.
+[ ] Back up your MongoDB Atlas database:
+    Atlas -> Backup -> enable free daily backups (PITR optional).
+[ ] Keep the app updated (see section 10).
+[ ] For a real hospital: consider HTTPS (Render provides it automatically),
+    a custom domain, and a paid tier for 24/7 uptime guarantees.
+
+================================================================================
+10. UPDATING YOUR APP AFTER CHANGES
+================================================================================
+
+10.1  Make your code changes locally, then:
+
+      git add .
+      git commit -m "describe your change"
+      git push origin main
+
+10.2  Render auto-deploys on every push to main (default setting).
+      Wait 2-5 minutes, then refresh your live URL.
+
+10.3  If the frontend changed, the build command rebuilds it automatically.
+
+================================================================================
+                    END OF DEPLOYMENT GUIDE
+================================================================================
