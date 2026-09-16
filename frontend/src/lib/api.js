@@ -1,4 +1,8 @@
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+// In production the backend is served from the same origin via the /api
+// rewrite (see vercel.json), so use a relative path. In dev, use the local API.
+const API_URL =
+    import.meta.env.VITE_API_URL ||
+    (import.meta.env.DEV ? "http://localhost:5000/api" : "/api");
 
 const authHeader = () => {
     const token = localStorage.getItem("token");
