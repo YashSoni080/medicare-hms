@@ -112,22 +112,23 @@ if (fs.existsSync(distPath)) {
 // --------------- Error handler (must be last) ---------------
 app.use(errorHandler);
 
-// --------------- Start server ---------------
+// --------------- Start server / export for Vercel ---------------
 const PORT = process.env.PORT || 5000;
 
-// Connect to MongoDB, then start listening. On failure, log a clear message
-// and keep the process alive so Vercel can report the error instead of
-// buffering queries for 10s.
-connectDB()
-    .then(() => {
-        app.listen(PORT, () => {
-            console.log(`MediCare API listening on port ${PORT}`);
-        });
-    })
-    .catch((err) => {
-        console.error("Failed to connect to MongoDB:", err.message);
-        // Still start the server so /api/health can report the problem
-        app.listen(PORT, () => {
-            console.log(`MediCare API listening on port ${PORT} (DB NOT CONNECTED)`);
-        });
+// Kick off the DB connection (cached across warm Vercel invocations).
+// Errors are logged but intentionally NOT re-thrown — the serverless
+// function must stay alive so /api/health can report the problem.
+connectDB().catch((err) => {
+    console.error("MongoDB connection failed:", err.message);
+});
+
+// Local development: start a listener.  On Vercel, the platform handles
+// the HTTP server — `app.listen()` must NOT be called because the module
+// must synchronously export the Express app for the serverless bridge.
+if (!process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`MediCare API listening on port ${PORT}`);
     });
+}
+
+export default app;
