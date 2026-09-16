@@ -46,6 +46,20 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Ensure MongoDB is connected before handling API requests.
+// `bufferCommands = false` means queries fail fast if the connection isn't
+// ready, so we await the (cached) connection here instead. On Vercel the
+// first request warms the function and triggers the connection; subsequent
+// warm invocations reuse it instantly.
+app.use("/api", async (_req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (err) {
+        res.status(503).json({ message: "Database unavailable", error: err.message });
+    }
+});
+
 // --------------- Routes ---------------
 app.get("/", (_req, res) => {
     res.json({ status: "ok", message: "MediCare API is running" });
@@ -115,16 +129,10 @@ app.use(errorHandler);
 // --------------- Start server / export for Vercel ---------------
 const PORT = process.env.PORT || 5000;
 
-// Kick off the DB connection (cached across warm Vercel invocations).
-// Errors are logged but intentionally NOT re-thrown — the serverless
-// function must stay alive so /api/health can report the problem.
-connectDB().catch((err) => {
-    console.error("MongoDB connection failed:", err.message);
-});
-
 // Local development: start a listener.  On Vercel, the platform handles
 // the HTTP server — `app.listen()` must NOT be called because the module
 // must synchronously export the Express app for the serverless bridge.
+// DB connection is handled lazily by the /api middleware above.
 if (!process.env.VERCEL) {
     app.listen(PORT, () => {
         console.log(`MediCare API listening on port ${PORT}`);
